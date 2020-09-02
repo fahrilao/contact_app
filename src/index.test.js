@@ -37,7 +37,13 @@ describe("Contact Actions", () => {
 
         expect(store.dispatch).toHaveBeenCalledTimes(1);
         expect(store.dispatch).toHaveBeenCalledWith(
-            updateContact({ payload: 'sample text' })
+            updateContact({
+                "id": "93ad6070-c92b-11e8-b02f-cbfa15db428d",
+                "firstName": "Afro",
+                "lastName": "Doe",
+                "age": 111,
+                "photo": "https://microhealth.com/assets/images/illustrations/learn-what-works-@2x.png"
+            })
         );
     });
 })
