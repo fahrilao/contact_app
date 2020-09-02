@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom'
 import { updateContact } from '../action'
 
 function Main(props) {
+    console.log(props)
     const history = useHistory()
     
     if (props.detail.firstName) {
@@ -18,8 +19,6 @@ function Main(props) {
             let id = props.detail.id
             let url = `https://simple-contact-crud.herokuapp.com/contact/${id}`
 
-            console.log(url)
-
             fetch(url, {
                 method: 'DELETE',
                 headers:{'content-type': 'application/json'},
@@ -30,8 +29,13 @@ function Main(props) {
                 .catch(err => console.error(err))
         }
 
+        const handleClick = () => {
+            props.handleClick2()
+        }
+
         return (
-            <section id="main__section" className={`flex-1 ${props.bgName}`}>
+            <section id="main__section"  className={ `flex-1 ${props.bgName}${ props.see ? ' show__section' : '' }` }>
+                <span className="back-to__contact" onClick={ handleClick }>&times;</span>
                 <div id="main__image" style={Style}></div>
                 <p id="main__name">{`${props.detail.firstName} ${props.detail.lastName}`}</p>
                 <p id="main__age">{props.detail.age} Years Old</p>

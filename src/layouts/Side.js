@@ -11,6 +11,10 @@ function Side(props) {
     
     const regex = new RegExp(keyword, 'g');
 
+    const handleClick = () => {
+        props.handleClick()
+    }
+
     useEffect(() => {
         getData()
     }, [getData])
@@ -18,7 +22,7 @@ function Side(props) {
     return (
         <div id="side__section">
             <h1 className="name__app">Contact App</h1>
-            <Link id="add__contact" to="/add">Add Contact</Link>
+            <Link id="add__contact" to="/add" onClick={ handleClick } >Add Contact</Link>
             <form id="form__search">
                 <div className="search__group">
                     <input id="search__contact" type="text" onChange={ (e) => setKeyword(e.target.value) } placeholder="Type for search" />
@@ -30,7 +34,7 @@ function Side(props) {
                 {
                     props.contacts.filter(({firstName}) => firstName.match(regex)).sort((a, b) => ((`${a.firstName} ${a.lastName}`) > (`${b.firstName} ${b.lastName}`)) ? 1 : -1).map((contact, index) => (
                         <Link id={ `get__detail-contact-${index}` } onClick={ () => props.getDetail(contact) } key={ contact.id } to={ `/detail` }>
-                            <Contact src={ contact.photo } name={ `${contact.firstName} ${contact.lastName} `} />
+                            <Contact handleClick={ handleClick } src={ contact.photo } name={ `${contact.firstName} ${contact.lastName} `} />
                         </Link>
                     ))
                 }

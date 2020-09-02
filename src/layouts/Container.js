@@ -8,19 +8,21 @@ import '../css/Container.css'
 
 function Container(props) {
     const [IndexBG, setIndexBG] = useState(1);
+    const [see, setSee] = useState(false);
 
     const handleClick = () => {
         setIndexBG(prevBG => prevBG === 1 ? 2 : 1)
+        setSee(!see)
     }
     
     return (
         <div className="container">
             <Side contacts={props.contacts} handleClick={ handleClick } />
             <Switch>
-                <Route exact path="/" component={ () => <DefaultPage bgName={ props.bgmain[0] } /> } />
-                <Route path="/detail/" component={ () => <Main bgName={ props.bgmain[IndexBG] } /> } />
-                <Route path="/add" component={ () => <AddContact /> } />
-                <Route path="/update/" component={ () => <AddContact update /> } />
+                <Route exact path="/" component={ () => <DefaultPage see={ see } bgName={ props.bgmain[0] } /> } />
+                <Route path="/detail/" component={ () => <Main handleClick2={ handleClick } see={ see } bgName={ props.bgmain[IndexBG] } /> } />
+                <Route path="/add" component={ () => <AddContact handleClick2={ handleClick } see={ see } /> } />
+                <Route path="/update/" component={ () => <AddContact handleClick2={ handleClick } see={ see } update /> } />
             </Switch>
         </div>
     )

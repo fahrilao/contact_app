@@ -56,8 +56,13 @@ function AddContact(props) {
           .catch(err => console.error(err))
     }
 
+    const handleClick = () => {
+        props.handleClick2()
+    }
+
     return (
-        <form id="form__contact" className="flex-1" onSubmit={ submitHandler }>
+        <form id="form__contact" className={ `flex-1 ${ props.see && 'show__section' }` } onSubmit={ submitHandler }>
+            <span className="back-to__contact">&times;</span>
             <h2 id="form__title">Add Contact</h2>
             <h3 id="form__subtitle">Personal Information</h3>
             <div className="form__group">
@@ -80,7 +85,7 @@ function AddContact(props) {
 
             <div className="form__group">
                 <button className="button__form" id="save__form">Save</button>
-                <button type="button" className="button__form" id="cancel__form">Cancel</button>
+                <button type="button" onClick={ handleClick } className="button__form" id="cancel__form">Cancel</button>
             </div>
         </form>
     )
